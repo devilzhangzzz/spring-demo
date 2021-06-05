@@ -15,7 +15,7 @@
 	<modules>
 		<!-- redis -->
 		<module>spring-boot-redis</module>
-
+		<module>spring-boot-security</module>
 	</modules>
 
 
