@@ -16,6 +16,18 @@ import java.net.UnknownHostException;
 @Configuration
 public class RedisConfig {
 
+//    @Bean
+//    public CacheManager cacheManager(RedisConnectionFactory factory) {
+//        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
+//                .entryTtl(Duration.ofSeconds(60))
+//                .disableCachingNullValues();
+//
+//        return RedisCacheManager.builder(factory)
+//                .cacheDefaults(config)
+//                .transactionAware()
+//                .build();
+//    }
+
     @Bean
     @ConditionalOnMissingBean(name = "redisTemplate")
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) throws UnknownHostException {

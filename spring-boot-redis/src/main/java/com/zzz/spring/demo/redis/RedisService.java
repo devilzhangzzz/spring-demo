@@ -2,8 +2,13 @@ package com.zzz.spring.demo.redis;
 
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.ApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * redisService
@@ -11,6 +16,7 @@ import org.springframework.stereotype.Component;
  * @author zhangzhizhong
  */
 @Component
+@RestController("redis")
 public class RedisService {
 
     @Autowired
@@ -36,6 +42,18 @@ public class RedisService {
             }
         }
         return true;
+    }
+
+    @Autowired
+    private ApplicationContext context;
+
+    @GetMapping("testCache")
+    @Cacheable(value = "testCache", key = "#id")
+    public String testCache(String id) {
+
+        CacheManager bean = context.getBean(CacheManager.class);
+        System.out.println(bean);
+        return id + "_zzz";
     }
 
 }
