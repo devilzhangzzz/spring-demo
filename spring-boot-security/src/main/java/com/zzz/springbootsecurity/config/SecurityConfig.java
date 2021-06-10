@@ -24,11 +24,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         PasswordEncoder passwordEncoder = this.passwordEncoder();
 
         //下面这两行配置表示在内存中配置了两个用户
-//        auth.inMemoryAuthentication()
-//                .withUser("javaboy").roles("admin").password(passwordEncoder.encode("123"))
-//                .and()
-//                .withUser("lisi").roles("user").password(passwordEncoder.encode("456"));
-        auth.ldapAuthentication().
+        auth.inMemoryAuthentication()
+                .withUser("javaboy").roles("admin").password(passwordEncoder.encode("123"))
+                .and()
+                .withUser("lisi").roles("user").password(passwordEncoder.encode("456"));
     }
 
     @Override
