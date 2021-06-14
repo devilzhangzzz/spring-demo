@@ -19,13 +19,13 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 /**
- * TODO
+ * 对称加密jwt认证适配器
  *
  * @author zhangzhizhong
  */
-@Configuration
-@EnableAuthorizationServer
-public class JwtAdapter implements AuthorizationServerConfigurer {
+//@Configuration
+//@EnableAuthorizationServer
+public class SymmetricEncryptJwtAdapter implements AuthorizationServerConfigurer {
 
     @Autowired
     private PasswordEncoder passwordEncoder;

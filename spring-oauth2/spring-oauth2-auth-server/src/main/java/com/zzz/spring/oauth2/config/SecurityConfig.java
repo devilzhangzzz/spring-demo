@@ -41,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()//开启登录配置
+                .antMatchers("/rsa/publicKey").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

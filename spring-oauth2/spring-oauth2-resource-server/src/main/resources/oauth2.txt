@@ -11,7 +11,7 @@ http://localhost:9999/oauth/token?client_id=client-for-server&client_secret=clie
 790ay2
 
 
-http://localhost:8080/oauth/token?client_id=zzz&client_secret=123&grant_type=authorization_code&code=gKWYfj
+http://localhost:8080/oauth/token?client_id=zzz&client_secret=123&grant_type=authorization_code&code=5m2YzJ
 
 
 http://localhost:9999/oauth/token?client_id=client-for-server&client_secret=client&grant_type=authorization_code&code=gCCuIP

@@ -2,26 +2,34 @@ package com.zzz.spring.oauth2.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
+
+import java.security.KeyPair;
 
 /**
- * TODO
+ * 对称加密jwt认证适配器
  *
  * @author zhangzhizhong
  */
-//@Configuration
-//@EnableAuthorizationServer
-public class AuthorizationServerConfigurerAdapter implements AuthorizationServerConfigurer {
+@Configuration
+@EnableAuthorizationServer
+public class AsymmetricEncryptJwtAdapter implements AuthorizationServerConfigurer {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -48,7 +56,7 @@ public class AuthorizationServerConfigurerAdapter implements AuthorizationServer
                 .autoApprove(true)
                 .scopes("all")
                 .secret(passwordEncoder.encode("123"))
-                .authorizedGrantTypes("authorization_code", "client_credentials")
+                .authorizedGrantTypes("authorization_code")
                 .resourceIds("c1");
     }
 
@@ -56,16 +64,43 @@ public class AuthorizationServerConfigurerAdapter implements AuthorizationServer
     public void configure(AuthorizationServerEndpointsConfigurer configurer) throws Exception {
         configurer.authenticationManager(authenticationManager)
                 .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
-                .tokenServices(this.tokenServices());
+                .accessTokenConverter(this.jwtAccessTokenConverter())
+                .tokenStore(this.tokenStore());
     }
 
     @Bean
     public AuthorizationServerTokenServices tokenServices() {
         DefaultTokenServices tokenServices = new DefaultTokenServices();
         tokenServices.setAccessTokenValiditySeconds(7200);
-        tokenServices.setTokenStore(new InMemoryTokenStore());
+        tokenServices.setTokenStore(this.tokenStore());
         tokenServices.setClientDetailsService(clientDetailsService);
         tokenServices.setSupportRefreshToken(true);
         return tokenServices;
     }
+
+    @Bean
+    public TokenStore tokenStore() {
+        return new JwtTokenStore(jwtAccessTokenConverter());
+    }
+
+    /**
+     * @Description: JWT 密钥非对称加密
+     * @param:
+     * @return:
+     * @author: fanjc
+     * @Date: 2019/3/12
+     */
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        converter.setKeyPair(this.keyPair());
+        return converter;
+    }
+
+    @Bean
+    public KeyPair keyPair() {
+        //从classpath下的证书中获取秘钥对
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), "123456".toCharArray());
+        return keyStoreKeyFactory.getKeyPair("jwt", "123456".toCharArray());
+    }
+
 }
