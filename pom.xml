@@ -50,6 +50,7 @@
 		<module>spring-boot-security</module>
 		<module>spring-oauth2</module>
 		<module>spring-nacos-client</module>
+		<module>spring-gateway</module>
 	</modules>
 
 
