@@ -1,4 +1,4 @@
-package com.zzz.spring.oauth2.controller;
+package com.zzz.spring.nacos.client.controller;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
