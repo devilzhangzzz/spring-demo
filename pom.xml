@@ -37,11 +37,9 @@
 	</dependencyManagement>
 
 	<modules>
-		<!-- redis -->
 		<module>spring-boot-redis</module>
 		<module>spring-boot-security</module>
-		<module>spring-oauth2-auth-server</module>
-		<module>spring-oauth2-resource-server</module>
+		<module>spring-oauth2</module>
 	</modules>
 
 
