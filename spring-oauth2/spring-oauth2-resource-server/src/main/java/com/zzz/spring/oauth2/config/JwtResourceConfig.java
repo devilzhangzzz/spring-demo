@@ -62,7 +62,7 @@ public class JwtResourceConfig extends ResourceServerConfigurerAdapter {
     public JwtAccessTokenConverter accessTokenConverter() {
         final JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         //这里使用堆成加密，123456789是work key
-        converter.setSigningKey("123456789");
+        converter.setSigningKey("zzz");
 //        KeyStoreKeyFactory keyStoreKeyFactory =
 //                new KeyStoreKeyFactory(new ClassPathResource("mytest.jks"), "mypass".toCharArray());
 //        converter.setKeyPair(keyStoreKeyFactory.getKeyPair("mytest"));
