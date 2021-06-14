@@ -11,14 +11,14 @@
 
 /**/logs/
 
-/grid-common/mvn
+
 
 
 
 /**/target/
 
 /**/*.iml
-/grid-business/*.project
+
 *.project
 *.classpath
 *.prefs
