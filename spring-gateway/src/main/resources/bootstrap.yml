@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: nacos-gateway
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${REGISTER_HOST:localhost}:${REGISTER_PORT:8848}
+        ip: 127.0.0.1
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: nacos-client1
+          uri: lb://nacos-client1
+          predicates:
+            - Path=/client1/**
+        - id: nacos-client2
+          uri: lb://nacos-client2
+          predicates:
+            - Path=/client2/**
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: 'http://localhost:8080/rsa/publicKey' #配置RSA的公钥访问地址
+      client:
+        registration:
+          providerid:
+            authorization-grant-type: "client_credentials"
+            client-id: "zzz"
+            client-secret: "123"
+            user-info-authentication-method: header
+        provider:
+          providerid:
+            token-uri: "working token-uri"
+
+
+
+
+server:
+  port: 8001
+
+
+
+secure:
+  ignored:
+    urls: /a
+

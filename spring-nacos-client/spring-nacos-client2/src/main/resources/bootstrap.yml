@@ -1,0 +1,18 @@
+server:
+  port: ${SERVER_PORT:18002}
+  servlet:
+    context-path: /client2
+spring:
+  application:
+    name: nacos-client2
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        ip: 127.0.0.1
+        server-addr: ${REGISTER_HOST:localhost}:${REGISTER_PORT:8848}
+      config:
+        server-addr: ${REGISTER_HOST:localhost}:${REGISTER_PORT:8848}
+        file-extension: yml
+        enabled: true
