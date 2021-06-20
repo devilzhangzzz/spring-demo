@@ -1,0 +1,17 @@
+logging:
+  level:
+    io:
+      seata: debug
+server:
+  port: 17001
+
+spring:
+  application:
+    name: business-service
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: business-service-group
+    nacos:
+      discovery:
+        server-addr: localhost:8848
