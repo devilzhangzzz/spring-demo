@@ -70,7 +70,7 @@ public class MyBatisConfig {
         bean.setDataSource(dataSourceProxy);
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         // bean.setConfigLocation(resolver.getResource("classpath:mybatis-config.xml"));
-        bean.setMapperLocations(resolver.getResources("classpath*:mybatis/**/*-mapper.xml"));
+        bean.setMapperLocations(resolver.getResources("classpath:mapper/*.xml"));
 
         SqlSessionFactory factory;
         try {

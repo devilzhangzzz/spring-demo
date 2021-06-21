@@ -18,7 +18,7 @@ spring:
   datasource:
     druid:
       driverClassName: com.mysql.jdbc.Driver
-      password: pitaya100
-      url: jdbc:mysql://127.0.0.1:3306/seata?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
-      username: root
+      password: suntek
+      url: jdbc:mysql://127.0.0.1:3306/seata?useSSL=false&useUnicode=true&characterEncoding=UTF-8&useUnicode=true&useSSL=false&serverTimezone=Hongkong
+      username: videoweb
 

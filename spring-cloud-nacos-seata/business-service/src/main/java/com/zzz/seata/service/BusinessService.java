@@ -2,14 +2,12 @@ package com.zzz.seata.service;
 
 import com.zzz.seata.dto.BusinessDTO;
 import com.zzz.seata.dto.CommodityDTO;
-import com.zzz.seata.dto.OrderDTO;
 import com.zzz.seata.enums.RspStatusEnum;
-import com.zzz.seata.exception.DefaultException;
-import com.zzz.seata.feign.AccountFeignClient;
 import com.zzz.seata.feign.StorageFeignClient;
 import com.zzz.seata.provider.BusinessProvider;
 import com.zzz.seata.response.ObjectResponse;
 import io.seata.core.context.RootContext;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +21,7 @@ public class BusinessService implements BusinessProvider {
 
 
     @Override
+    @GlobalTransactional(timeoutMills = 300000, name = "dubbo-gts-seata-example")
     public ObjectResponse handleBusiness(BusinessDTO businessDTO) {
         System.out.println("开始全局事务，XID = " + RootContext.getXID());
         ObjectResponse<Object> objectResponse = new ObjectResponse<>();

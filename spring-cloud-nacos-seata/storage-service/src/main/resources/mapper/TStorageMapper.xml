@@ -5,7 +5,7 @@
 
 
     <update id="decreaseStorage">
-        update t_storage set count = count-${count} where commodity_code = #{commodityCode}
+        update t_storage set count = count-${count} where commodity_code = #{commodityCode} and count - ${count} >= 0
     </update>
 
 </mapper>
