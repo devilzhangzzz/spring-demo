@@ -23,8 +23,8 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
  *
  * @author zhangzhizhong
  */
-//@Configuration
-//@EnableAuthorizationServer
+@Configuration
+@EnableAuthorizationServer
 public class SymmetricEncryptJwtAdapter implements AuthorizationServerConfigurer {
 
     @Autowired
@@ -52,7 +52,7 @@ public class SymmetricEncryptJwtAdapter implements AuthorizationServerConfigurer
                 .autoApprove(true)
                 .scopes("all")
                 .secret(passwordEncoder.encode("123"))
-                .authorizedGrantTypes("authorization_code")
+                .authorizedGrantTypes("authorization_code", "password")
                 .resourceIds("c1");
     }
 

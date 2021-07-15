@@ -48,7 +48,7 @@ public class AuthorizationServerConfigurerAdapter implements AuthorizationServer
                 .autoApprove(true)
                 .scopes("all")
                 .secret(passwordEncoder.encode("123"))
-                .authorizedGrantTypes("authorization_code", "client_credentials")
+                .authorizedGrantTypes("authorization_code", "client_credentials", "password")
                 .resourceIds("c1");
     }
 

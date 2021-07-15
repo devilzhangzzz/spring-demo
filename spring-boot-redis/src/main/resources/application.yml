@@ -41,3 +41,76 @@ spring:
         max-idle: 10
         # 连接池中的最小空闲连接
         min-idle: 5
+
+jetcache:
+  # 统计间隔，默认0：表示不统计
+  statIntervalMinutes: 15
+  # areaName是否作为缓存key前缀，默认True
+  areaInCacheName: false
+  hidePackages: com.suntek.grid
+  local:
+    # 60分钟默认本地缓存
+    default:
+      limit: 50
+      type: caffeine
+      keyConvertor: fastjson
+      expireAfterWriteInMillis: 3600000
+      expireAfterAccessInMillis: 1800000
+    # 10分钟长时本地缓存，主要用于要求时效一般
+    longTime:
+      type: caffeine
+      keyConvertor: fastjson
+      expireAfterWriteInMillis: 600000
+      expireAfterAccessInMillis: 60000
+    # 1分钟短时本地缓存，主要用于要求时效较高的配置
+    shortTime:
+      type: caffeine
+      keyConvertor: fastjson
+      expireAfterWriteInMillis: 60000
+      expireAfterAccessInMillis: 40000
+  remote:
+    # 24小时默认远程缓存
+    default:
+      type: redis
+      expireAfterWriteInMillis: 86400000
+      keyConvertor: fastjson
+      valueEncoder: kryo
+      valueDecoder: kryo
+      poolConfig:
+        minIdle: 5
+        maxIdle: 20
+        maxTotal: 50
+      host: ${REDIS_HOST:172.25.22.95}
+      port: ${REDIS_PORT:6379}
+      database: 0
+      password: 123456
+    # 24小时长时远程缓存，主要用于要求时效要求一般的集中式缓存
+    longTime:
+      type: redis
+      expireAfterWriteInMillis: 86400000
+      keyConvertor: fastjson
+      valueEncoder: kryo
+      valueDecoder: kryo
+      poolConfig:
+        minIdle: 5
+        maxIdle: 20
+        maxTotal: 50
+      host: ${REDIS_HOST:172.25.22.95}
+      port: ${REDIS_PORT:6379}
+      database: 0
+      password: 123456
+    # 10分钟短时远程缓存，主要用于要求时效较高的集中式缓存
+    shortTime:
+      type: redis
+      expireAfterWriteInMillis: 600000
+      keyConvertor: fastjson
+      valueEncoder: kryo
+      valueDecoder: kryo
+      poolConfig:
+        minIdle: 5
+        maxIdle: 20
+        maxTotal: 50
+      host: ${REDIS_HOST:172.25.22.95}
+      port: ${REDIS_PORT:6379}
+      database: 0
+      password: 123456

@@ -45,7 +45,7 @@ public class JwtResourceConfig extends ResourceServerConfigurerAdapter {
 
         http.authorizeRequests().anyRequest().authenticated()
                 .and().csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);;
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
 
@@ -61,7 +61,7 @@ public class JwtResourceConfig extends ResourceServerConfigurerAdapter {
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
         final JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        //这里使用堆成加密，123456789是work key
+        //这里使用对称加密，123456789是work key
         converter.setSigningKey("zzz");
 //        KeyStoreKeyFactory keyStoreKeyFactory =
 //                new KeyStoreKeyFactory(new ClassPathResource("mytest.jks"), "mypass".toCharArray());
