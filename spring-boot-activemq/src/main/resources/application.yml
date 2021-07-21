@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: spring-boot-activemq
+  main:
+    allow-bean-definition-overriding: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+  servlet:
+    multipart:
+      enabled: true
+      max-request-size: "2MB"
+      max-file-size: "2MB"
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
+  activemq:
+    user: admin
+    password: admin
+    broker-url: failover:(tcp://172.25.22.95:61616,tcp://172.25.22.98:61616,tcp://172.25.22.28:61616)
+    pool:
+      enabled: true
+      max-connections: 100

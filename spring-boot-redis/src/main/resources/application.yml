@@ -95,7 +95,7 @@ jetcache:
         minIdle: 5
         maxIdle: 20
         maxTotal: 50
-      host: ${REDIS_HOST:172.25.22.95}
+      host: localhost
       port: ${REDIS_PORT:6379}
       database: 0
       password: 123456
@@ -110,7 +110,7 @@ jetcache:
         minIdle: 5
         maxIdle: 20
         maxTotal: 50
-      host: ${REDIS_HOST:172.25.22.95}
+      host: localhost
       port: ${REDIS_PORT:6379}
       database: 0
       password: 123456

@@ -4,6 +4,11 @@ import com.alicp.jetcache.anno.CacheRefresh;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.Cached;
 import com.google.common.base.Preconditions;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
@@ -15,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -24,6 +30,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 @RestController("redis")
+@Api("REDIS")
 public class RedisService {
 
     @Autowired
@@ -69,5 +76,32 @@ public class RedisService {
     public String testCache2(@RequestBody IsHavePermissionVO vo) {
         return vo.getUrl();
     }
+
+    @PostMapping("testSwagger")
+    @ApiOperation(value = "testSwagger", notes = "testSwagger")
+    public Result<SwaggerDemoDTO> testSwagger() {
+        return Result.success(new SwaggerDemoDTO());
+    }
+
+    @PostMapping("testSwagger2")
+    @ApiOperation(value = "testSwagger2", notes = "testSwagger2")
+    public ServiceResult<SwaggerDemoDTO> testSwagger2() {
+        return ServiceResult.ofSuccess(new SwaggerDemoDTO());
+    }
+
+
+    @Data
+    @ApiModel
+    public static class SwaggerDemoDTO {
+
+        @ApiModelProperty("结果")
+        private List<String> rows;
+
+        @ApiModelProperty("年龄")
+        private String age;
+    }
+
+
+
 
 }
