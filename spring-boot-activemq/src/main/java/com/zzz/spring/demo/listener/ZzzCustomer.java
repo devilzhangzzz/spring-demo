@@ -1,6 +1,5 @@
 package com.zzz.spring.demo.listener;
 
-import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
@@ -10,13 +9,12 @@ import org.springframework.stereotype.Component;
  * @author zhangzhizhong
  */
 @Component
-@EnableJms
-public class TopicCustomer {
+public class ZzzCustomer {
 
 
-    @JmsListener(destination = "zzz123456", containerFactory = "topicListener")
+    @JmsListener(destination = "zzz")
     public void subscriber(String text) {
-        System.out.println("消费者1111111111111111111111消费+" + text);
+        System.out.println("消费+" + text);
     }
 
 

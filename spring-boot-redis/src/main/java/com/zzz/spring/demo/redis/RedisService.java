@@ -1,5 +1,6 @@
 package com.zzz.spring.demo.redis;
 
+import com.alicp.jetcache.anno.CacheInvalidate;
 import com.alicp.jetcache.anno.CacheRefresh;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.Cached;
@@ -77,6 +78,24 @@ public class RedisService {
         return vo.getUrl();
     }
 
+    @PostMapping("testCache3")
+    @Cached(area = "longTime", name = "testCache3::", cacheType = CacheType.REMOTE)
+    @CacheRefresh(refresh = 2, stopRefreshAfterLastAccess = 48, timeUnit = TimeUnit.HOURS)
+    public String testCache3(String s) {
+        return s + "sss";
+    }
+
+    @PostMapping("removeTestCache")
+    public String    removeTestCache() {
+        this.removeTestCache3();
+        return "removed";
+    }
+
+    @CacheInvalidate(area = "longTime", name = "testCache3::")
+    private void removeTestCache3() {
+
+    }
+
     @PostMapping("testSwagger")
     @ApiOperation(value = "testSwagger", notes = "testSwagger")
     public Result<SwaggerDemoDTO> testSwagger() {
@@ -88,6 +107,7 @@ public class RedisService {
     public ServiceResult<SwaggerDemoDTO> testSwagger2() {
         return ServiceResult.ofSuccess(new SwaggerDemoDTO());
     }
+
 
 
     @Data

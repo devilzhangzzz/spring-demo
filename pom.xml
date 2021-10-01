@@ -60,6 +60,7 @@
 		<module>spring-gateway</module>
 		<module>spring-cloud-nacos-seata</module>
 		<module>spring-boot-activemq</module>
+		<module>spring-boot-jdbc</module>
 	</modules>
 
 

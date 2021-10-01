@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql.hsom:3306/hsom?characterEncoding=UTF-8&useUnicode=true&useSSL=false&serverTimezone=Hongkong
+    username: hsom_all
+    password: m3gvH2mOjqFbsHZRW6th403a/p9MW/vZpcnmnr/twxn0S4f0BVd0L8SX7ID2TY8w/Uj87TX8kuhaqD41lKpcRA==
+    connect-properties:
+      config.decrypt: true
+      config.decrypt.key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAPySf6djw4cAMV9pU7tCy/ly5qBkP40uEpkq5UuNTurDJDksJmNCQMSahjbRJtPOVdtnjY5dP45tBENNLqVHcvkCAwEAAQ==
+    # 初始连接数
+    initialSize: 5
+    # 最小连接池数量
+    minIdle: 10
+    # 最大连接池数量
+    maxActive: 100
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    # 配置一个连接在池中最大生存的时间，单位是毫秒
+    maxEvictableIdleTimeMillis: 900000
+    # 配置检测连接是否有效
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    webStatFilter:
+      enabled: true
+    statViewServlet:
+      enabled: true
+      # 设置白名单，不填则允许所有访问
+      allow:
+      url-pattern: /monitor/druid/*

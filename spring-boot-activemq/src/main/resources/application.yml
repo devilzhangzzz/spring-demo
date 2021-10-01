@@ -17,7 +17,7 @@ spring:
   activemq:
     user: admin
     password: admin
-    broker-url: failover:(tcp://172.25.22.95:61616,tcp://172.25.22.98:61616,tcp://172.25.22.28:61616)
+    broker-url: failover:(tcp://172.25.22.95:61616,tcp://172.25.22.28:61616,tcp://172.25.22.98:61616)
     pool:
       enabled: true
       max-connections: 100

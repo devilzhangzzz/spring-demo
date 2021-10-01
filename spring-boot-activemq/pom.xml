@@ -80,31 +80,65 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring-boot-maven-plugin.version}</version>
 				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
+					<includeSystemScope>true</includeSystemScope>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.asciidoctor</groupId>
+				<artifactId>asciidoctor-maven-plugin</artifactId>
+				<version>1.5.6</version>
+				<configuration>
+					<sourceDirectory>src/main/docs/asciidoc/generated</sourceDirectory>
+					<outputDirectory>src/main/gst/asciidoc/html</outputDirectory>
+					<backend>html</backend>
+					<sourceHighlighter>coderay</sourceHighlighter>
+					<attributes>
+						<doctype>book</doctype>
+						<toc>left</toc>
+						<toclevels>3</toclevels>
+						<numbered></numbered>
+						<hardbreaks></hardbreaks>
+						<sectlinks></sectlinks>
+						<sectanchors></sectanchors>
+					</attributes>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>8</source>
-					<target>8</target>
+					<skip>true</skip>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.3.2.RELEASE</version>
 				<configuration>
-					<source>8</source>
-					<target>8</target>
+					<includeSystemScope>true</includeSystemScope>
 				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
+
 		</plugins>
 	</build>
 

@@ -35,7 +35,7 @@ public abstract class AbstractMessageListener<T> {
      * @author jnie
      * 2021年7月20日 下午2:47:13
      */
-    public abstract void receiveQueueMessage(Message message, Session session) ;
+    public abstract void receiveQueueMessage(Message message, Session session) throws JMSException;
 
     /**
      *  提供默认的接收消息的处理流程实现
